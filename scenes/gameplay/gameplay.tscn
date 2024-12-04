@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://4fyoq8npekf0"]
+
+[ext_resource type="Script" path="res://scenes/gameplay/state_machine.gd" id="3_yfm5o"]
+[ext_resource type="Script" path="res://scenes/gameplay/states/idle.gd" id="4_81b8h"]
+[ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="5"]
+
+[node name="Gameplay" type="Node"]
+script = ExtResource("5")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_yfm5o")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+unique_name_in_owner = true
+script = ExtResource("4_81b8h")
