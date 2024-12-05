@@ -1,4 +1,10 @@
-extends MachineState
+@icon("res://components/behaviour/state-machines/hierarchical-state-machine/state_icon.png")
+class_name MachineState extends Node
+
+signal entered
+signal finished(next_state)
+
+var FSM: FiniteStateMachine
 
 
 func ready() -> void:

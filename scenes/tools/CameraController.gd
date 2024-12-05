@@ -43,6 +43,9 @@ func set_cam_limits():
 	limit_right = marker_2d_max.position.x - 2.0 * zoom_target.x / vp_size.x
 	limit_top = marker_2d_min.position.y + 2.0 * zoom_target.y / vp_size.y
 	limit_bottom = marker_2d_max.position.y - 2.0 * zoom_target.y / vp_size.y
+	
+	print("(%f, %f) (%f, %f)" % [limit_left, limit_top, limit_right, limit_bottom])
+	print(position)
 
 func ClickAndDrag():
 	if !isDragging and Input.is_action_just_pressed("camera_pan"):

@@ -1,15 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://4fyoq8npekf0"]
+[gd_scene load_steps=5 format=3 uid="uid://4fyoq8npekf0"]
 
-[ext_resource type="Script" path="res://scenes/gameplay/state_machine.gd" id="3_yfm5o"]
-[ext_resource type="Script" path="res://scenes/gameplay/states/idle.gd" id="4_81b8h"]
+[ext_resource type="Script" path="res://components/behaviour/state-machines/hierarchical-state-machine/finite-state-machine.gd" id="2_p6d0j"]
+[ext_resource type="PackedScene" uid="uid://djgy8cxvdipy4" path="res://scenes/tools/game.tscn" id="2_t1b8a"]
+[ext_resource type="Script" path="res://scenes/gameplay/states/idle.gd" id="3_vr43r"]
 [ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="5"]
 
 [node name="Gameplay" type="Node"]
 script = ExtResource("5")
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_yfm5o")
+[node name="Game" parent="." instance=ExtResource("2_t1b8a")]
 
-[node name="Idle" type="Node" parent="StateMachine"]
-unique_name_in_owner = true
-script = ExtResource("4_81b8h")
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_p6d0j")
+current_state = NodePath("Idle")
+enable_stack = false
+
+[node name="Idle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_vr43r")
