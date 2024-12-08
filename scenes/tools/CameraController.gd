@@ -21,7 +21,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	Zoom(delta)
-	ClickAndDrag()
 	
 func Zoom(delta):
 	if Input.is_action_just_pressed("camera_zoom_in"):
@@ -37,15 +36,16 @@ func Zoom(delta):
 	zoom = zoom.slerp(zoom_target, zoom_speed * delta)
 
 func set_cam_limits():
-	var vp_size : Vector2 = get_viewport().get_visible_rect().size
-		
-	limit_left = marker_2d_min.position.x + 2.0 * zoom_target.x / vp_size.x
-	limit_right = marker_2d_max.position.x - 2.0 * zoom_target.x / vp_size.x
-	limit_top = marker_2d_min.position.y + 2.0 * zoom_target.y / vp_size.y
-	limit_bottom = marker_2d_max.position.y - 2.0 * zoom_target.y / vp_size.y
-	
-	print("(%f, %f) (%f, %f)" % [limit_left, limit_top, limit_right, limit_bottom])
-	print(position)
+	pass
+	#var vp_size : Vector2 = get_viewport().get_visible_rect().size
+		#
+	#limit_left = marker_2d_min.position.x + 2.0 * zoom_target.x / vp_size.x
+	#limit_right = marker_2d_max.position.x - 2.0 * zoom_target.x / vp_size.x
+	#limit_top = marker_2d_min.position.y + 2.0 * zoom_target.y / vp_size.y
+	#limit_bottom = marker_2d_max.position.y - 2.0 * zoom_target.y / vp_size.y
+	#
+	#print("(%f, %f) (%f, %f)" % [limit_left, limit_top, limit_right, limit_bottom])
+	#print(position)
 
 func ClickAndDrag():
 	if !isDragging and Input.is_action_just_pressed("camera_pan"):
