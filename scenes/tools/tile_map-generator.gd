@@ -16,6 +16,8 @@ func _process(_delta):
 		return
 	
 	tile_map = get_parent()
+	tile_map.clear()
+	
 	var width : int = terrain.size.x
 	var height : int = terrain.size.y
 	var image : Image = terrain.get_texture().get_image()

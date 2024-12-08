@@ -1,10 +1,6 @@
 extends MachineState
 
 
-func ready() -> void:
-	pass
-
-
 func _enter() -> void:
 	FSM.boat.rotate_boat(90)
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://4fyoq8npekf0"]
 
-[ext_resource type="PackedScene" uid="uid://djgy8cxvdipy4" path="res://scenes/tools/game.tscn" id="2_t1b8a"]
+[ext_resource type="PackedScene" uid="uid://djgy8cxvdipy4" path="res://scenes/maps/gawan/map.tscn" id="2_t1b8a"]
 [ext_resource type="PackedScene" uid="uid://dllp3ltvfrucp" path="res://scenes/boat/boat.tscn" id="3_n68t8"]
 [ext_resource type="Script" path="res://scenes/gameplay/states/idle.gd" id="3_vr43r"]
 [ext_resource type="Script" path="res://scenes/gameplay/finite_state_machine.gd" id="4_bs6vg"]
@@ -9,14 +9,15 @@
 [node name="Gameplay" type="Node"]
 script = ExtResource("5")
 
-[node name="Game" parent="." instance=ExtResource("2_t1b8a")]
+[node name="Map" parent="." instance=ExtResource("2_t1b8a")]
 
 [node name="Boat" parent="." instance=ExtResource("3_n68t8")]
+position = Vector2(16868, 25276)
 
-[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="GameplayFSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_bs6vg")
 current_state = NodePath("Idle")
 enable_stack = false
 
-[node name="Idle" type="Node" parent="FiniteStateMachine"]
+[node name="Idle" type="Node" parent="GameplayFSM"]
 script = ExtResource("3_vr43r")

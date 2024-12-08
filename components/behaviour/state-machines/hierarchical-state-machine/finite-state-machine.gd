@@ -20,6 +20,10 @@ var locked := false
 
 
 func _ready():
+	lock_state_machine()
+	
+func init_fsm():
+	unlock_state_machine()
 	assert(current_state is MachineState, "FiniteStateMachine: This Finite state machine does not have an initial state defined")
 	
 	state_changed.connect(on_state_changed)

@@ -1,13 +1,19 @@
 extends Sprite2D
 
-@onready var finite_state_machine = $FiniteStateMachine
+@onready var boat_fsm = %BoatFSM
 
 var rotation_speed : float = 60.0 # 30 deg/s
 var tween : Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	EventBus.sig_race_start.connect(race_start)
+	boat_fsm.boat = self
+	boat_fsm.init_fsm()
+
+
+func race_start():
+	boat_fsm.change_state_to('AtCenter')
 
 
 func rotate_boat(target_rotation : float):
