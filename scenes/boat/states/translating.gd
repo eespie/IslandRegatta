@@ -2,8 +2,8 @@ extends MachineState
 
 
 func _enter() -> void:
-	pass
-	
+	FSM.boat.translate_boat()
+
 
 func _exit(_next_state: MachineState) -> void:
 	pass

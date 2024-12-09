@@ -2,8 +2,8 @@ extends MachineState
 
 
 func _enter() -> void:
-	FSM.boat.rotate_boat(90)
-	
+	FSM.boat.rotate_boat(randi_range(-1, 1))
+
 
 func _exit(_next_state: MachineState) -> void:
 	pass
