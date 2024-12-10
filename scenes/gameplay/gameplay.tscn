@@ -2,22 +2,24 @@
 
 [ext_resource type="PackedScene" uid="uid://djgy8cxvdipy4" path="res://scenes/maps/gawan/map.tscn" id="2_t1b8a"]
 [ext_resource type="PackedScene" uid="uid://dllp3ltvfrucp" path="res://scenes/boat/boat.tscn" id="3_n68t8"]
-[ext_resource type="Script" path="res://scenes/gameplay/states/idle.gd" id="3_vr43r"]
+[ext_resource type="Script" path="res://scenes/gameplay/states/pre_race.gd" id="3_vr43r"]
 [ext_resource type="Script" path="res://scenes/gameplay/finite_state_machine.gd" id="4_bs6vg"]
-[ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="5"]
+[ext_resource type="Script" path="res://scenes/gameplay/race.gd" id="5"]
 
-[node name="Gameplay" type="Node"]
+[node name="Race" type="Node" groups=["Root"]]
 script = ExtResource("5")
 
 [node name="Map" parent="." instance=ExtResource("2_t1b8a")]
+unique_name_in_owner = true
 
 [node name="Boat" parent="." instance=ExtResource("3_n68t8")]
 position = Vector2(16868, 25276)
 
-[node name="GameplayFSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="RaceFSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+unique_name_in_owner = true
 script = ExtResource("4_bs6vg")
-current_state = NodePath("Idle")
+current_state = NodePath("PreRace")
 enable_stack = false
 
-[node name="Idle" type="Node" parent="GameplayFSM"]
+[node name="PreRace" type="Node" parent="RaceFSM"]
 script = ExtResource("3_vr43r")

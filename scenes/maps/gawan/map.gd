@@ -1,12 +1,9 @@
 extends Node2D
 
+@onready var terrain = %Terrain
+
 @export var map_name : String
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func recenter(current_pos : Vector2) -> Vector2:
+	var terrain_pos = terrain.local_to_map(current_pos)
+	return terrain.map_to_local(terrain_pos)

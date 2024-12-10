@@ -1,6 +1,6 @@
 extends MachineState
 
-
+# State Translating
 func _enter() -> void:
 	FSM.boat.translate_boat()
 

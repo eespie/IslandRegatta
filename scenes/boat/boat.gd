@@ -8,6 +8,7 @@ var next_state : String = 'PreRace'
 var current_direction : int
 
 var tween : Tween
+var race : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,7 +28,7 @@ func race_start():
 
 # turn +1 cw -1 acw
 func rotate_boat(turn : int):
-	current_direction = (current_direction + turn) % 6
+	current_direction += turn
 	var target_rotation : float = 30.0 + 60.0 * current_direction
 	next_state = 'Translating'
 	if tween:
@@ -46,3 +47,7 @@ func translate_boat():
 	var duration : float = 120.0 / linear_speed
 	tween.tween_property(self, 'position', position + velocity * duration, duration)
 	tween.tween_callback(change_state)
+
+
+func recenter():
+	set_position(race.map.recenter(position))

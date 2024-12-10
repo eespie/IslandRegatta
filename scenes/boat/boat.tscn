@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://di38j0hwsgxmp" path="res://scenes/gameplay/camera/camera_2d.tscn" id="2_l7fyj"]
 [ext_resource type="Script" path="res://scenes/boat/finite_state_machine.gd" id="4_bsxtw"]
 [ext_resource type="Script" path="res://scenes/boat/states/at_center.gd" id="5_ci72a"]
-[ext_resource type="Script" path="res://scenes/boat/states/pre_race.gd" id="5_ly3ds"]
+[ext_resource type="Script" path="res://scenes/boat/states/idle.gd" id="5_ly3ds"]
 [ext_resource type="Script" path="res://scenes/boat/states/translating.gd" id="6_tl8uk"]
 
-[node name="Boat" type="Sprite2D"]
+[node name="Boat" type="Sprite2D" groups=["Boat"]]
 position = Vector2(32648, 72420)
 texture = ExtResource("1_m7jj7")
 script = ExtResource("2_f203x")
@@ -19,9 +19,9 @@ position = Vector2(0, 0)
 [node name="BoatFSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 unique_name_in_owner = true
 script = ExtResource("4_bsxtw")
-current_state = NodePath("PreRace")
+current_state = NodePath("Idle")
 
-[node name="PreRace" type="Node" parent="BoatFSM"]
+[node name="Idle" type="Node" parent="BoatFSM"]
 script = ExtResource("5_ly3ds")
 
 [node name="AtCenter" type="Node" parent="BoatFSM"]
