@@ -6,5 +6,5 @@ func _ready():
 func save_permanent_data():
 	pass
 
-func load_permanent_data(node_data):
+func load_permanent_data(_node_data):
 	pass
