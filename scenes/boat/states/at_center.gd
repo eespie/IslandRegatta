@@ -3,7 +3,7 @@ extends MachineState
 # State AtCenter
 func _enter() -> void:
 	FSM.boat.recenter()
-	FSM.boat.rotate_boat(randi_range(-1, 1))
+	FSM.boat.rotate_boat()
 
 
 func _exit(_next_state: MachineState) -> void:
