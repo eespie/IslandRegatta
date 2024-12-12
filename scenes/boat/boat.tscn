@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dllp3ltvfrucp"]
+[gd_scene load_steps=9 format=3 uid="uid://dllp3ltvfrucp"]
 
 [ext_resource type="Texture2D" uid="uid://bspntf2gp2wh2" path="res://assets/sprites/boat.png" id="1_m7jj7"]
 [ext_resource type="Script" path="res://scenes/boat/boat.gd" id="2_f203x"]
@@ -7,11 +7,15 @@
 [ext_resource type="Script" path="res://scenes/boat/states/at_center.gd" id="5_ci72a"]
 [ext_resource type="Script" path="res://scenes/boat/states/idle.gd" id="5_ly3ds"]
 [ext_resource type="Script" path="res://scenes/boat/states/translating.gd" id="6_tl8uk"]
+[ext_resource type="Script" path="res://scenes/boat/polar.gd" id="8_wtkdm"]
 
 [node name="Boat" type="Sprite2D" groups=["Boat"]]
 position = Vector2(32648, 72420)
 texture = ExtResource("1_m7jj7")
 script = ExtResource("2_f203x")
+
+[node name="Polar" type="Node" parent="."]
+script = ExtResource("8_wtkdm")
 
 [node name="Camera2D" parent="." instance=ExtResource("2_l7fyj")]
 position = Vector2(0, 0)

@@ -3,7 +3,7 @@ extends Sprite2D
 @onready var boat_fsm = %BoatFSM
 
 var rotation_speed : float = 90.0
-var linear_speed : float = 70.0
+var linear_speed : float = 100.0
 var next_state : String = 'PreRace'
 var current_direction : int
 var next_dir : int
@@ -38,7 +38,7 @@ func rotate_boat():
 		tween.kill()
 	tween = get_tree().create_tween()
 	var duration : float = abs(rotation_degrees - target_rotation) / rotation_speed
-	tween.tween_property(self, 'rotation_degrees', target_rotation, duration)
+	tween.tween_property(self, 'rotation_degrees', target_rotation, duration).set_trans(Tween.TRANS_QUAD)
 	tween.tween_callback(change_state)
 
 func translate_boat():
