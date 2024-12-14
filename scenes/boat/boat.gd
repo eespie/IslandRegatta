@@ -1,15 +1,17 @@
 extends Sprite2D
 
 @onready var boat_fsm = %BoatFSM
+@onready var polar = %Polar
 
 var rotation_speed : float = 90.0
-var linear_speed : float = 100.0
 var next_state : String = 'PreRace'
 var current_direction : int
 var next_dir : int
 
 var tween : Tween
+
 var race : Node
+var wind : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,14 +45,36 @@ func rotate_boat():
 
 func translate_boat():
 	next_state = 'AtCenter'
-	var velocity : Vector2 = Vector2.UP.rotated(rotation) * linear_speed
+	var speed = get_speed() * 5.0
+	var duration : float = 0.1
+	if speed > 0.0:
+		duration = 120.0 / speed
+	var velocity : Vector2 = Vector2.UP.rotated(rotation) * speed
 	if tween:
 		tween.kill()
 	tween = get_tree().create_tween()
-	var duration : float = 120.0 / linear_speed
 	tween.tween_property(self, 'position', position + velocity * duration, duration)
 	tween.tween_callback(change_state)
 
+
+func get_speed() -> float:
+	var wind_at_pos : Vector2i = wind.get_wind(position)
+	var wind_dir : int = wind_at_pos.x
+	var tws : int = wind_at_pos.y
+	var twa : int = normalize(rotation_degrees - wind_dir)
+	if twa > 180:
+		twa = 360 - twa
+	var speed = polar.get_speed(twa, tws)
+	print("TWA %d - TWS %d - boat %f speed %f" % [twa, tws, rotation_degrees, speed])
+	return speed
+
+func normalize(rot : float) -> int:
+	while rot > 360:
+		rot -= 360
+	while rot < 0:
+		rot += 360
+	
+	return roundi(rot)
 
 func recenter():
 	set_position(race.map.recenter(position))

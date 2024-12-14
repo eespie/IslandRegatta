@@ -11,7 +11,7 @@ func _exit(_next_state: MachineState) -> void:
 	
 
 func handle_input(_event: InputEvent):
-	pass	
+	pass
 
 func update(_delta):
 	pass

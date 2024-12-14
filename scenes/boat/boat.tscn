@@ -15,6 +15,7 @@ texture = ExtResource("1_m7jj7")
 script = ExtResource("2_f203x")
 
 [node name="Polar" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("8_wtkdm")
 
 [node name="Camera2D" parent="." instance=ExtResource("2_l7fyj")]

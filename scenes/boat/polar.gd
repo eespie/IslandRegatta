@@ -4,6 +4,7 @@ var polar_file : String = "res://assets/polar/60ftmono.json"
 var polar_data : Dictionary
 var min_tws : int = 4
 var max_tws : int = 37
+var min_twa : int = 30
 
 func _ready():
 	var content : FileAccess = FileAccess.open(polar_file, FileAccess.READ)
@@ -21,4 +22,8 @@ func _ready():
 	
 func get_speed(twa : int, tws : int) -> float:
 	tws = clampi(tws, min_tws, max_tws)
-	return polar_data[twa][tws]
+	if twa < min_twa:
+		return 0.0
+	if twa % 2 == 1:
+		twa = twa - 1
+	return polar_data[str(twa)][str(tws)]
