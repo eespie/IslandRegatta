@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://4fyoq8npekf0"]
+[gd_scene load_steps=12 format=3 uid="uid://4fyoq8npekf0"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/wind.gd" id="2_fhslr"]
 [ext_resource type="PackedScene" uid="uid://djgy8cxvdipy4" path="res://scenes/maps/gawan/map.tscn" id="2_t1b8a"]
@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://scenes/gameplay/finite_state_machine.gd" id="4_bs6vg"]
 [ext_resource type="Script" path="res://scenes/gameplay/race.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://barl4q1kugrmm" path="res://scenes/gameplay/pause-layer/pause-layer.tscn" id="6_uv0wy"]
+[ext_resource type="Script" path="res://scenes/gameplay/pre_start.gd" id="7_3ygjh"]
+[ext_resource type="Script" path="res://scenes/gameplay/states/race.gd" id="8_vrxqk"]
+[ext_resource type="Script" path="res://scenes/gameplay/states/finish.gd" id="9_8igdg"]
+[ext_resource type="Script" path="res://scenes/gameplay/states/game_over.gd" id="10_ugjbp"]
 
 [node name="Race" type="Node" groups=["Root"]]
 script = ExtResource("5")
@@ -29,5 +33,17 @@ enable_stack = false
 
 [node name="PreRace" type="Node" parent="RaceFSM"]
 script = ExtResource("3_vr43r")
+
+[node name="PreStart" type="Node" parent="RaceFSM"]
+script = ExtResource("7_3ygjh")
+
+[node name="Race" type="Node" parent="RaceFSM"]
+script = ExtResource("8_vrxqk")
+
+[node name="Finish" type="Node" parent="RaceFSM"]
+script = ExtResource("9_8igdg")
+
+[node name="GameOver" type="Node" parent="RaceFSM"]
+script = ExtResource("10_ugjbp")
 
 [node name="PauseLayer" parent="." instance=ExtResource("6_uv0wy")]
