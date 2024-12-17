@@ -1,12 +1,20 @@
 extends Boat
 
-@onready var boat_fsm = %BoatFSM
+@onready var next = %Next
+@onready var target_ok = %TargetOk
+@onready var target_blocked = %TargetBlocked
+@onready var boat_icon = %BoatIcon
 @onready var polar = %Polar
+@onready var boat_fsm = %BoatFSM
 
 var rotation_speed : float = 60.0
-var next_state : String = 'PreRace'
+var next_state : String = 'Idle'
 var current_direction : int
 var next_dir : int
+
+var curr_tile_pos : Vector2i
+var next_tile_pos : Vector2i
+var target_tile_pos : Vector2i
 
 var tween : Tween
 
@@ -40,7 +48,7 @@ func rotate_boat():
 		tween.kill()
 	tween = get_tree().create_tween()
 	var duration : float = abs(rotation_degrees - target_rotation) / rotation_speed
-	tween.tween_property(self, 'rotation_degrees', target_rotation, duration).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(boat_icon, 'rotation_degrees', target_rotation, duration).set_trans(Tween.TRANS_QUAD)
 	tween.tween_callback(change_state)
 
 func translate_boat():
@@ -49,11 +57,11 @@ func translate_boat():
 	var duration : float = 0.1
 	if speed > 0.0:
 		duration = 120.0 / speed
-	var velocity : Vector2 = Vector2.UP.rotated(rotation) * speed
+	var velocity : Vector2 = Vector2.UP.rotated(boat_icon.get_rotation()) * speed
 	if tween:
 		tween.kill()
 	tween = get_tree().create_tween()
-	tween.tween_property(self, 'position', position + velocity * duration, duration)
+	tween.tween_property(boat_icon, 'position', position + velocity * duration, duration)
 	tween.tween_callback(change_state)
 
 
