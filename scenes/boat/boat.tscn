@@ -9,10 +9,11 @@
 [ext_resource type="Script" path="res://scenes/boat/states/translating.gd" id="6_tl8uk"]
 [ext_resource type="Script" path="res://scenes/boat/polar.gd" id="8_wtkdm"]
 
-[node name="Boat" type="Sprite2D" groups=["Boat"]]
-position = Vector2(32648, 72420)
-texture = ExtResource("1_m7jj7")
+[node name="Boat" type="Node2D" groups=["Boat"]]
 script = ExtResource("2_f203x")
+
+[node name="BoatImg" type="Sprite2D" parent="."]
+texture = ExtResource("1_m7jj7")
 
 [node name="Polar" type="Node" parent="."]
 unique_name_in_owner = true

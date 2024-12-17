@@ -1,3 +1,3 @@
 extends FiniteStateMachine
 
-var boat: Sprite2D
+var boat: Node2D

@@ -29,6 +29,7 @@ EventBus="*res://globals/event_bus.gd"
 GameManager="*res://globals/game_manager.gd"
 SaveGame="*res://globals/save_game.gd"
 TriangularDistribution="*res://globals/triangular_distribution.gd"
+Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 
 [category]
 
@@ -43,7 +44,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ggt-core/plugin.cfg", "res://addons/ggt-debug-shortcuts/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/ggt-core/plugin.cfg", "res://addons/ggt-debug-shortcuts/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [global_group]
 

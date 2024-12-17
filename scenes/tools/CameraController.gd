@@ -5,9 +5,9 @@ extends Camera2D
 
 
 var zoom_target :Vector2
-var dragStartMousePos = Vector2.ZERO
-var dragStartCameraPos = Vector2.ZERO
-var isDragging : bool = false
+var dragStartMousePos := Vector2.ZERO
+var dragStartCameraPos := Vector2.ZERO
+var isDragging := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,6 +41,6 @@ func ClickAndDrag():
 		isDragging = false
 		
 	if isDragging:
-		var moveVector : Vector2 = get_viewport().get_mouse_position() - dragStartMousePos
+		var moveVector := get_viewport().get_mouse_position() - dragStartMousePos
 		position = dragStartCameraPos - moveVector * 1/zoom.x
 		

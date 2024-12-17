@@ -9,7 +9,7 @@ extends Node
 @onready var terrain = %Terrain
 
 var tile_map : TileMapLayer
-@export var is_generated : bool = false
+@export var is_generated := false
 
 func _process(_delta):
 	if is_generated:
@@ -21,12 +21,12 @@ func _process(_delta):
 	var width : int = terrain.size.x
 	var height : int = terrain.size.y
 	var image : Image = terrain.get_texture().get_image()
-	var y : int = 0
-	var x : int = 0
+	var y := 0
+	var x := 0
 	
 	while y < height:
 		while x < width:
-			var color : Color = image.get_pixel(x, y)
+			var color := image.get_pixel(x, y)
 			match color.to_html():
 				water_color:
 					tile_map.set_cell(Vector2i(x,y), 0, Vector2i(0,0))

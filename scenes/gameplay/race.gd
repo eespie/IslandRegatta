@@ -2,6 +2,8 @@ extends Node
 
 @onready var map = %Map
 @onready var wind = %Wind
+@onready var umpire = $Umpire
+
 @onready var race_fsm = %RaceFSM
 
 func _ready():

@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Boat
 
 @onready var boat_fsm = %BoatFSM
 @onready var polar = %Polar
