@@ -20,7 +20,7 @@ script = ExtResource("5")
 unique_name_in_owner = true
 
 [node name="Player" parent="." instance=ExtResource("3_n68t8")]
-position = Vector2(16140, 24640)
+position = Vector2(15178, 24846)
 
 [node name="Wind" type="Node" parent="."]
 unique_name_in_owner = true

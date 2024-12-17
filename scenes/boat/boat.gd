@@ -3,7 +3,7 @@ extends Boat
 @onready var boat_fsm = %BoatFSM
 @onready var polar = %Polar
 
-var rotation_speed : float = 90.0
+var rotation_speed : float = 60.0
 var next_state : String = 'PreRace'
 var current_direction : int
 var next_dir : int
