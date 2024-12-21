@@ -9,6 +9,7 @@ extends Node
 func _ready():
 	get_tree().set_group("Boat", "race", self)
 	get_tree().set_group("Boat", "wind", wind)
+	get_tree().set_group("Boat", "map", map)
 	
 	wind.map = map
 	
