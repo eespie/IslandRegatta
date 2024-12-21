@@ -14,6 +14,7 @@
 
 [node name="Boat" type="Node2D" groups=["Boat"]]
 script = ExtResource("2_f203x")
+time_scale = 10.0
 
 [node name="NextTile" type="Sprite2D" parent="."]
 unique_name_in_owner = true
