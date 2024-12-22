@@ -1,13 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dllp3ltvfrucp"]
+[gd_scene load_steps=11 format=3 uid="uid://dllp3ltvfrucp"]
 
 [ext_resource type="Texture2D" uid="uid://bspntf2gp2wh2" path="res://assets/sprites/boat.png" id="1_m7jj7"]
+[ext_resource type="PackedScene" uid="uid://cop8thj8iuaow" path="res://scenes/boat/target_tile/target_tile.tscn" id="2_bopdu"]
 [ext_resource type="Script" path="res://scenes/boat/boat.gd" id="2_f203x"]
-[ext_resource type="Texture2D" uid="uid://3manp21jc8qm" path="res://assets/tiles/target_ok.png" id="2_v2wgh"]
-[ext_resource type="Texture2D" uid="uid://dragnb5oaa7al" path="res://assets/tiles/target_blocked.png" id="3_hhung"]
 [ext_resource type="Script" path="res://scenes/boat/finite_state_machine.gd" id="4_bsxtw"]
 [ext_resource type="Script" path="res://scenes/boat/boat_icon.gd" id="5_c0kq7"]
 [ext_resource type="Script" path="res://scenes/boat/states/at_center.gd" id="5_ci72a"]
-[ext_resource type="Script" path="res://scenes/boat/states/idle.gd" id="5_ly3ds"]
+[ext_resource type="Script" path="res://scenes/boat/states/blocked.gd" id="5_ly3ds"]
 [ext_resource type="PackedScene" uid="uid://di38j0hwsgxmp" path="res://scenes/gameplay/camera/camera_2d.tscn" id="5_ohsqa"]
 [ext_resource type="Script" path="res://scenes/boat/states/translating.gd" id="6_tl8uk"]
 [ext_resource type="Script" path="res://scenes/boat/polar.gd" id="8_wtkdm"]
@@ -16,21 +15,11 @@
 script = ExtResource("2_f203x")
 time_scale = 10.0
 
-[node name="NextTile" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-texture = ExtResource("2_v2wgh")
-
-[node name="TargetTile" type="Node2D" parent="."]
+[node name="NextTile" parent="." instance=ExtResource("2_bopdu")]
 unique_name_in_owner = true
 
-[node name="TargetOk" type="Sprite2D" parent="TargetTile"]
+[node name="TargetTile" parent="." instance=ExtResource("2_bopdu")]
 unique_name_in_owner = true
-texture = ExtResource("2_v2wgh")
-
-[node name="TargetBlocked" type="Sprite2D" parent="TargetTile"]
-unique_name_in_owner = true
-visible = false
-texture = ExtResource("3_hhung")
 
 [node name="BoatIcon" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -47,9 +36,10 @@ script = ExtResource("8_wtkdm")
 [node name="BoatFSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 unique_name_in_owner = true
 script = ExtResource("4_bsxtw")
-current_state = NodePath("Idle")
+current_state = NodePath("Blocked")
+enable_stack = false
 
-[node name="Idle" type="Node" parent="BoatFSM"]
+[node name="Blocked" type="Node" parent="BoatFSM"]
 script = ExtResource("5_ly3ds")
 
 [node name="AtCenter" type="Node" parent="BoatFSM"]

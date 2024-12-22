@@ -12,8 +12,10 @@ func ready() -> void:
 
 
 func _enter() -> void:
+	call_deferred("_deferred_enter")
+
+func _deferred_enter():
 	pass
-	
 
 func _exit(_next_state: MachineState) -> void:
 	pass
