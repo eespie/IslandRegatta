@@ -13,11 +13,11 @@ extends Boat
 var curr_tile_pos : Vector2
 
 var rotation_speed : float = 60.0
+var linear_inertia : float = 0.2
+var current_linear_speed : float = 0.0
 var next_state : String = 'AtCenter'
 var current_direction : int
 var next_dir : int
-
-var tween : Tween
 
 var race : Node
 var map : Map
@@ -53,14 +53,9 @@ func rotate_boat():
 	boat_icon.rotate_boat(current_direction, rotation_speed)
 
 func translate_boat():
-	if next_tile.is_blocked:
-		next_state = 'Blocked'
-		next_dir = 0
-		change_state()
-	else:
-		next_state = 'AtCenter'
-		var speed = get_speed() * time_scale
-		boat_icon.translate_boat(speed, grid_dist)
+	next_state = 'AtCenter'
+	var speed = get_speed() * time_scale
+	boat_icon.translate_boat(speed, grid_dist, linear_inertia)
 
 func get_speed() -> float:
 	var boat_rotation : float = 30.0 + 60.0 * current_direction

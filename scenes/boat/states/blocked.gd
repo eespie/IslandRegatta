@@ -3,6 +3,7 @@ extends MachineState
 # State Idle
 func _deferred_enter() -> void:
 	Log.debug("BoatFSM enter Blocked")
+	FSM.boat.next_dir = 0
 
 func _exit(_next_state: MachineState) -> void:
 	Log.debug("BoatFSM exit Blocked next %s" % [_next_state])
