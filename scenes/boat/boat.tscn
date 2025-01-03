@@ -15,7 +15,6 @@
 
 [node name="Boat" type="Node2D" groups=["Boat"]]
 script = ExtResource("2_f203x")
-time_scale = 10.0
 
 [node name="NextTile" parent="." instance=ExtResource("2_bopdu")]
 unique_name_in_owner = true
@@ -59,7 +58,6 @@ theme_type_variation = &"LabelGui"
 horizontal_alignment = 1
 
 [node name="Camera2D" parent="RealBoat" instance=ExtResource("5_ohsqa")]
-position = Vector2(0, 0)
 
 [node name="Polar" type="Node" parent="."]
 unique_name_in_owner = true

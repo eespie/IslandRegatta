@@ -2,13 +2,14 @@ extends Boat
 
 # Boat cell
 
-@export var grid_dist : float = 120.0
-@export var time_scale : float = 5.0
+# Boat setup
 @export var boat_name : String
+@export_range(0.0, 1.0) var speed_loss_factor_in_rotation : float = 0.5
+@export var rotation_speed : float = 60.0
+@export var linear_inertia : float = 0.2
 
 @onready var label_name = %Name
 @onready var label_speed = %Speed
-
 @onready var next_tile = %NextTile
 @onready var target_tile = %TargetTile
 @onready var real_boat = %RealBoat
@@ -19,9 +20,7 @@ extends Boat
 # Tiles position
 var curr_tile_pos : Vector2
 
-var rotation_speed : float = 60.0
-var linear_inertia : float = 0.2
-var current_linear_speed : float = 0.0
+var current_linear_speed : float
 var next_state : String = 'AtCenter'
 var current_direction : int
 var next_dir : int
@@ -34,6 +33,7 @@ var wind : Wind
 func _ready():
 	# Position 1 of 6
 	current_direction = 0
+	set_linear_speed(0.0)
 	next_dir = 0
 	EventBus.sig_race_start.connect(race_start)
 	real_boat.boat = self
@@ -63,7 +63,6 @@ func rotate_boat():
 func translate_boat():
 	next_state = 'AtCenter'
 	var speed := get_speed()
-	label_speed.set_text("%.1f" % [speed * 1.852])
 	real_boat.translate_boat(speed * time_scale, grid_dist, linear_inertia)
 
 func get_speed() -> float:
@@ -77,6 +76,14 @@ func get_speed() -> float:
 	var speed : float = polar.get_speed(twa, tws)
 	print("TWA %d - TWS %d - boat %f speed %f" % [twa, tws, boat_rotation, speed])
 	return speed
+
+func set_linear_speed(speed):
+	current_linear_speed = speed
+	label_speed.set_text("%.1f" % [speed * 1.852 / time_scale])
+
+
+func adjust_speed_for_rotation():
+	set_linear_speed(current_linear_speed * speed_loss_factor_in_rotation)
 
 func normalize(rot : float) -> int:
 	while rot > 360:
@@ -140,3 +147,7 @@ func cancel_turn():
 	next_dir = 0
 	update_target_tile()
 	position_tiles()
+
+
+func get_boat_offest()-> Vector2:
+	return real_boat.position

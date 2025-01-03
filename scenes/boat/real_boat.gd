@@ -10,7 +10,7 @@ var action : ACTION = ACTION.IDLE
 @onready var boat_icon = %BoatIcon
 
 var linear_speed : float
-var current_linear_speed : float = 0.0
+
 var linear_inertia : float
 var delta_position : Vector2
 var target_position : Vector2
@@ -35,9 +35,8 @@ func translate_boat(speed : float, dist : float, inertia : float):
 
 
 func _translating(delta):
-	current_linear_speed = lerp(current_linear_speed, linear_speed, (1.0 - linear_inertia) * delta)
-	boat.current_linear_speed = current_linear_speed
-	var dp = delta_position * current_linear_speed * delta
+	boat.set_linear_speed(lerp(boat.current_linear_speed, linear_speed, (1.0 - linear_inertia) * delta))
+	var dp = delta_position * boat.current_linear_speed * delta
 	position += dp
 	var dist_to_target : float = target_position.distance_squared_to(position)
 	if dist_to_target > last_ditance_to_target:
@@ -53,11 +52,9 @@ func recenter():
 	set_position(Vector2.ZERO)
 
 
-func stop_boat():
-	current_linear_speed = 0
-
 func set_action(act : ACTION):
 	action = act
+
 
 func _process(delta):
 	match action:

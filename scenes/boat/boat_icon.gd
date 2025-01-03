@@ -19,7 +19,7 @@ func rotate_boat(direction : float, rot_speed : float):
 	last_ditance_to_target = abs(delta_rotation)
 	rotation_speed = sign(delta_rotation) * rot_speed
 	if last_ditance_to_target > epsilon:
-		real_boat.stop_boat()
+		boat.adjust_speed_for_rotation()
 	else:
 		real_boat.set_action(real_boat.ACTION.IDLE)
 		rotation_degrees = target_rotation
