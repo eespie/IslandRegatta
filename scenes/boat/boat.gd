@@ -1,10 +1,17 @@
 extends Boat
 
+# Boat cell
+
 @export var grid_dist : float = 120.0
 @export var time_scale : float = 5.0
+@export var boat_name : String
+
+@onready var label_name = %Name
+@onready var label_speed = %Speed
 
 @onready var next_tile = %NextTile
 @onready var target_tile = %TargetTile
+@onready var real_boat = %RealBoat
 @onready var boat_icon = %BoatIcon
 @onready var polar = %Polar
 @onready var boat_fsm = %BoatFSM
@@ -26,13 +33,14 @@ var wind : Wind
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Position 1 of 6
-	boat_icon.set_rotation_degrees(30)
 	current_direction = 0
 	next_dir = 0
 	EventBus.sig_race_start.connect(race_start)
+	real_boat.boat = self
 	boat_icon.boat = self
 	boat_fsm.boat = self
 	boat_fsm.init_fsm()
+	label_name.set_text(boat_name)
 
 func change_state():
 	boat_fsm.change_state_to(next_state)
@@ -50,12 +58,13 @@ func rotate_boat():
 	current_direction += next_dir
 	next_dir = 0
 	next_state = 'Translating'
-	boat_icon.rotate_boat(current_direction, rotation_speed)
+	real_boat.rotate_boat(current_direction, rotation_speed)
 
 func translate_boat():
 	next_state = 'AtCenter'
-	var speed = get_speed() * time_scale
-	boat_icon.translate_boat(speed, grid_dist, linear_inertia)
+	var speed := get_speed()
+	label_speed.set_text("%.1f" % [speed * 1.852])
+	real_boat.translate_boat(speed * time_scale, grid_dist, linear_inertia)
 
 func get_speed() -> float:
 	var boat_rotation : float = 30.0 + 60.0 * current_direction
@@ -77,7 +86,7 @@ func normalize(rot : float) -> int:
 	return roundi(rot)
 
 func recenter():
-	boat_icon.recenter()
+	real_boat.recenter()
 	curr_tile_pos = next_tile.tile_pos
 	position = map.get_pos_from_tile(curr_tile_pos)
 	next_tile.set_tile_pos(target_tile.tile_pos)

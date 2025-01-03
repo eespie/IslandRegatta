@@ -21,6 +21,7 @@ unique_name_in_owner = true
 
 [node name="Player" parent="." instance=ExtResource("3_n68t8")]
 position = Vector2(15178, 24846)
+boat_name = "Player"
 
 [node name="Wind" type="Node" parent="."]
 unique_name_in_owner = true
