@@ -50,7 +50,7 @@ func get_wind_vector(pos: Vector2) -> Vector2:
 		var twa_deg := synoptic_wind_dir - angle_deg
 		if angle_deg < 0:
 			twa_deg += 180
-		var deviation_deg : float = synoptic_wind_dir + 180 + cos(deg_to_rad(twa_deg + 180)) * 180.0
+		var deviation_deg : float = synoptic_wind_dir + 180 - cos(deg_to_rad(twa_deg)) * 180.0
 		var deviation := polar_to_euclydian(deviation_deg, height_coeff)
 		wind += deviation
 	
