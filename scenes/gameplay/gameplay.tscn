@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://4fyoq8npekf0"]
 
-[ext_resource type="Script" path="res://scenes/gameplay/wind.gd" id="2_fhslr"]
 [ext_resource type="PackedScene" uid="uid://djgy8cxvdipy4" path="res://scenes/maps/gawan/map.tscn" id="2_t1b8a"]
 [ext_resource type="PackedScene" uid="uid://dllp3ltvfrucp" path="res://scenes/boat/boat.tscn" id="3_n68t8"]
 [ext_resource type="Script" path="res://scenes/gameplay/states/pre_race.gd" id="3_vr43r"]
+[ext_resource type="PackedScene" uid="uid://dspia7oucasds" path="res://scenes/wind/wind.tscn" id="4_2h3by"]
 [ext_resource type="Script" path="res://scenes/gameplay/finite_state_machine.gd" id="4_bs6vg"]
 [ext_resource type="Script" path="res://scenes/gameplay/race.gd" id="5"]
 [ext_resource type="Script" path="res://components/race/umpire.gd" id="5_jb2o8"]
@@ -23,9 +23,8 @@ unique_name_in_owner = true
 position = Vector2(15178, 24846)
 boat_name = "Player"
 
-[node name="Wind" type="Node" parent="."]
+[node name="Wind" parent="." instance=ExtResource("4_2h3by")]
 unique_name_in_owner = true
-script = ExtResource("2_fhslr")
 
 [node name="Umpire" type="Node" parent="."]
 script = ExtResource("5_jb2o8")

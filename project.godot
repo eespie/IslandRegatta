@@ -50,15 +50,18 @@ enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://add
 [file_customization]
 
 folder_colors={
+"res://addons/": "gray",
 "res://assets/": "yellow",
 "res://components/": "pink",
 "res://globals/": "teal",
+"res://resources/": "purple",
 "res://scenes/menu/": "yellow"
 }
 
 [global_group]
 
 Boat=""
+Race=""
 
 [gui]
 

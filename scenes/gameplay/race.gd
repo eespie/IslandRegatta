@@ -7,10 +7,8 @@ extends Node
 @onready var race_fsm = %RaceFSM
 
 func _ready():
-	get_tree().set_group("Boat", "race", self)
-	get_tree().set_group("Boat", "wind", wind)
-	get_tree().set_group("Boat", "map", map)
-	
-	wind.map = map
-	
+	get_tree().set_group("Race", "race", self)
+	get_tree().set_group("Race", "wind", wind)
+	get_tree().set_group("Race", "map", map)
+		
 	EventBus.sig_race_start.emit()

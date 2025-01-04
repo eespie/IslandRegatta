@@ -67,14 +67,13 @@ func translate_boat():
 
 func get_speed() -> float:
 	var boat_rotation : float = 30.0 + 60.0 * current_direction
-	var wind_at_pos : Vector2i = wind.get_wind(position)
-	var wind_dir : int = wind_at_pos.x
-	var tws : int = wind_at_pos.y
-	var twa : int = normalize(boat_rotation - wind_dir)
+	var wind_dir : int = wind.get_wind_dir(position)
+	var tws : int = wind.get_wind_speed(position)
+	var twa : int = normalize_rotation(boat_rotation - wind_dir)
 	if twa > 180:
 		twa = 360 - twa
 	var speed : float = polar.get_speed(twa, tws)
-	print("TWA %d - TWS %d - boat %f speed %f" % [twa, tws, boat_rotation, speed])
+	print("wind %d TWA %d - TWS %d - boat %f speed %f" % [wind_dir, twa, tws, boat_rotation, speed])
 	return speed
 
 func set_linear_speed(speed):
@@ -85,7 +84,7 @@ func set_linear_speed(speed):
 func adjust_speed_for_rotation():
 	set_linear_speed(current_linear_speed * speed_loss_factor_in_rotation)
 
-func normalize(rot : float) -> int:
+func normalize_rotation(rot : float) -> int:
 	while rot > 360:
 		rot -= 360
 	while rot < 0:

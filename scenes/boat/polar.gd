@@ -23,7 +23,7 @@ func _ready():
 func get_speed(twa : int, tws : int) -> float:
 	tws = clampi(tws, min_tws, max_tws)
 	if twa < min_twa:
-		return 0.0
+		return 1.0
 	if twa % 2 == 1:
 		twa = twa - 1
 	return polar_data[str(twa)][str(tws)]

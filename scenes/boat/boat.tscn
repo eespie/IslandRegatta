@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scenes/boat/states/translating.gd" id="6_tl8uk"]
 [ext_resource type="Script" path="res://scenes/boat/polar.gd" id="8_wtkdm"]
 
-[node name="Boat" type="Node2D" groups=["Boat"]]
+[node name="Boat" type="Node2D" groups=["Boat", "Race"]]
 script = ExtResource("2_f203x")
 
 [node name="NextTile" parent="." instance=ExtResource("2_bopdu")]

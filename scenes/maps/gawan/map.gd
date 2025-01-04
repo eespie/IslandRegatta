@@ -6,6 +6,7 @@ extends Map
 
 @export var map_name : String
 
+
 func recenter(current_pos : Vector2) -> Vector2:
 	return get_pos_from_tile(get_tile_pos(current_pos))
 
@@ -27,3 +28,10 @@ func is_free_water(tile_pos : Vector2) -> bool:
 		return true
 	
 	return false
+
+func get_height(pos : Vector2) -> float:
+	var tile_pos = get_tile_pos(pos)
+	var data = terrain.get_cell_tile_data(tile_pos)
+	if data:
+		return data.get_custom_data("height")
+	return 0.0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dspia7oucasds"]
+
+[ext_resource type="Script" path="res://scenes/gameplay/wind.gd" id="1_r87in"]
+
+[node name="Wind" type="Node" groups=["Race"]]
+script = ExtResource("1_r87in")
