@@ -1,12 +1,26 @@
 extends Boat
 
-# Boat cell
+# Represent boat cell
 
 # Boat setup
+@export_category('Boat Setup')
 @export var boat_name : String
-@export_range(0.0, 1.0) var speed_loss_factor_in_rotation : float = 0.5
-@export var rotation_speed : float = 60.0
-@export var linear_inertia : float = 0.2
+
+@export_category('Boat Points')
+@export_range(0, 5) var rotation_points : int
+@export_range(0, 5) var speed_loss_in_rotation_points : int
+@export_range(0, 5) var inertia_points : int
+@export_range(0, 5) var max_speed_points : int
+
+@export var rotation_speed_curve : Curve
+@export var speed_loss_in_rotation_ratio_curve : Curve
+@export var inertia_curve : Curve
+@export var max_speed_ratio_curve : Curve
+
+var speed_loss_factor_in_rotation : float
+var rotation_speed : float
+var linear_inertia : float
+var max_speed_ratio : float
 
 @onready var label_name = %Name
 @onready var label_speed = %Speed
@@ -31,6 +45,17 @@ var wind : Wind
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Boat setup
+	rotation_speed = rotation_speed_curve.sample(rotation_points / 5.0)
+	speed_loss_factor_in_rotation = speed_loss_in_rotation_ratio_curve.sample(speed_loss_in_rotation_points / 5.0)
+	linear_inertia = inertia_curve.sample(inertia_points / 5.0)
+	max_speed_ratio = max_speed_ratio_curve.sample(max_speed_points / 5.0)
+	
+	print("rotation speed %f" % [rotation_speed])
+	print("speed loss factor in rotation %f" % [speed_loss_factor_in_rotation])
+	print("linear inertia %f" % [linear_inertia])
+	print("max speed ratio %f" % [max_speed_ratio])
+	
 	# Position 1 of 6
 	current_direction = 0
 	set_linear_speed(0.0)
@@ -65,6 +90,7 @@ func translate_boat():
 	var speed := get_speed()
 	real_boat.translate_boat(speed * time_scale, grid_dist, linear_inertia)
 
+
 func get_speed() -> float:
 	var boat_rotation : float = 30.0 + 60.0 * current_direction
 	var wind_dir : int = wind.get_wind_dir(position)
@@ -72,9 +98,10 @@ func get_speed() -> float:
 	var twa : int = normalize_rotation(boat_rotation - wind_dir)
 	if twa > 180:
 		twa = 360 - twa
-	var speed : float = polar.get_speed(twa, tws)
-	print("wind %d TWA %d - TWS %d - boat %f speed %f" % [wind_dir, twa, tws, boat_rotation, speed])
+	var speed : float = polar.get_speed(twa, tws) * max_speed_ratio
+	#print("wind %d TWA %d - TWS %d - boat %f speed %f" % [wind_dir, twa, tws, boat_rotation, speed])
 	return speed
+
 
 func set_linear_speed(speed):
 	current_linear_speed = speed

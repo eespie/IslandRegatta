@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dllp3ltvfrucp"]
+[gd_scene load_steps=17 format=3 uid="uid://dllp3ltvfrucp"]
 
 [ext_resource type="Texture2D" uid="uid://bspntf2gp2wh2" path="res://assets/sprites/boat.png" id="1_m7jj7"]
 [ext_resource type="PackedScene" uid="uid://cop8thj8iuaow" path="res://scenes/boat/target_tile/target_tile.tscn" id="2_bopdu"]
@@ -13,8 +13,39 @@
 [ext_resource type="Script" path="res://scenes/boat/states/translating.gd" id="6_tl8uk"]
 [ext_resource type="Script" path="res://scenes/boat/polar.gd" id="8_wtkdm"]
 
+[sub_resource type="Curve" id="Curve_vtgbx"]
+min_value = 60.0
+max_value = 90.0
+_data = [Vector2(0, 60), 0.0, 0.0, 0, 0, Vector2(0.496504, 67.7979), 35.8627, 35.8627, 0, 0, Vector2(1, 90), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_5lrjw"]
+min_value = 0.5
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.501166, 0.652913), 0.870412, 0.870412, 0, 0, Vector2(0.997669, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_16a3a"]
+min_value = 0.1
+max_value = 0.9
+_data = [Vector2(0, 0.9), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_fuy0a"]
+min_value = 1.0
+max_value = 1.5
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.400932, 1.13857), 0.833621, 0.833621, 0, 0, Vector2(0.599068, 1.38239), 0.911541, 0.911541, 0, 0, Vector2(1, 1.5), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="Boat" type="Node2D" groups=["Boat", "Race"]]
 script = ExtResource("2_f203x")
+rotation_points = 5
+speed_loss_in_rotation_points = 3
+inertia_points = 2
+max_speed_points = 5
+rotation_speed_curve = SubResource("Curve_vtgbx")
+speed_loss_in_rotation_ratio_curve = SubResource("Curve_5lrjw")
+inertia_curve = SubResource("Curve_16a3a")
+max_speed_ratio_curve = SubResource("Curve_fuy0a")
 
 [node name="NextTile" parent="." instance=ExtResource("2_bopdu")]
 unique_name_in_owner = true
